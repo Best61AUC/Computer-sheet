@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>102 mcq of computer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: #0f2027;
+      background: linear-gradient(to bottom right, #2c5364, #203a43, #0f2027);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0; min-height: 100vh;
+    }
+    h1 { color: #fff; text-align: center; margin-top: 30px; font-size: 2.7em; letter-spacing: 2px; text-shadow: 2px 4px 14px rgba(0,0,0,0.34);}
+    #quiz-container { max-width: 720px; margin: 40px auto; padding: 24px; background: rgba(255,255,255,0.10); border-radius: 22px; box-shadow: 0 8px 42px rgba(30,30,85,0.23); min-height: 480px; position: relative;}
+    .question-card { background: #212e36; border-radius: 18px; box-shadow: 0 2px 16px rgba(0,0,0,.08); padding: 36px 28px 30px 28px; margin-bottom: 18px; margin-top: 0; font-size: 1.35em; min-height: 240px; color: #f1f6f9; position: relative; z-index: 1; transition: box-shadow .2s; font-weight: 470;}
+    .question-num { font-size:1.22em;color:#38a3a5;margin-bottom:10px;display:block; font-weight: bold;}
+    .option-list { margin: 0; padding: 0; list-style: none; margin-top: 2px;}
+    .option-list li { padding: 0; margin: 10px 0;}
+    .option-label { display: flex; align-items: center; background: rgba(255,255,255,0.04); border-radius: 9px; padding: 14px 18px; margin: 5px 0; cursor: pointer; transition: background .15s, color .2s; font-size: 1.12em; border: 2.3px solid transparent; position: relative;}
+    .option-label input[type="radio"] { accent-color: #6ee7b7; margin-right: 15px; transform: scale(1.25);}
+    .option-label.selected { background: #264653; color: #1db496; border-color: #3edfb6;}
+    .option-label.correct { background: rgba(46, 204, 113,0.27) !important; border-color: #2ecc7138 !important; color: #36fa95 !important;}
+    .option-label.incorrect { background: rgba(220, 53, 69, 0.20)!important; border-color: #dc354577 !important; color:#fb6161!important}
+    .option-label.reveal { border-color: #44c57b !important; color: #57ffc9 !important; font-weight: bold; box-shadow: 0 2px 8px 0 #15fcac1a;}
+    .hide { display: none !important;}
+    #submit-btn, .difficulty-btn { margin-top: 28px; padding: 17px 36px; border: none; border-radius: 9px; font-size: 1.23em; cursor: pointer; font-weight: 700; letter-spacing: 1.9px; box-shadow: 0 2px 18px #07dda322; transition: background .18s, color .17s, box-shadow .2s; outline:none;}
+    #submit-btn { background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%); color: #222; min-width: 210px;}
+    #submit-btn:disabled { background: #3a6957; color: #cfc; opacity: 0.48; cursor: not-allowed;}
+    .difficulty-btn { background: #181820; color: #fff; margin-right: 16px; font-size: 1em; box-shadow: 0 2px 14px #3332;}
+    .difficulty-btn.easy { background-color: #45daad;}
+    .difficulty-btn.medium { background-color: #fecc31;color:#3d2d0d;}
+    .difficulty-btn.hard { background-color: #ea5353;}
+    .correct-msg, .incorrect-msg { font-size: 1.34em; margin-top: 20px; font-weight: bold; padding: 8px 0; text-align:center;}
+    .correct-msg { color: #00e48f; background: rgba(46, 204, 113, 0.17); border-radius: 7px;}
+    .incorrect-msg { color: #ea5353; background: rgba(234, 83, 83, 0.13); border-radius: 7px;}
+    .register-box {background:#24374e;border-radius:16px; padding:25px 18px 16px 18px;max-width:400px;margin:18px auto 28px auto;box-shadow:0 2px 24px #01281f51;}
+    .register-head {font-size:1.27em;text-align:center;font-weight:bold;color:#37dfbb;letter-spacing:2px;margin-bottom:15px;line-height:180%;}
+    .register-box textarea { width: 90%; font-size:1.17em; padding:11px 14px; margin:8px 0 16px 0; border-radius:7px; border:2px solid #24cfa5; background:#fcfefe; resize: vertical; min-height:32px; }
+    .register-box button {font-size:1.1em;background:#33b06c;color:white;border-radius:8px; border:none;padding:10px 23px;cursor:pointer;box-shadow:0 2px 8px #262;}
+    .register-box button:disabled{opacity:.64;background:#629291;}
+    @media (max-width: 740px) {#quiz-container {max-width: 99vw;padding:10px;} .question-card {padding: 18px 5vw;}}
+    @media (max-width: 480px) {h1 {font-size:2em;} #quiz-container {padding:3vw;} .question-card {padding:9px 2vw;font-size:1.11em;} #submit-btn, .difficulty-btn{font-size:1em;padding:13px 19px;} .option-label{font-size:1em;}}
+    .result-final-msg {font-size:1.22em;color:#88ffae;line-height:160%;margin:10px 0 20px 0;}
+    .improve-label {color:#fcd14b;font-weight:bold;font-size:1.08em;}
+    .improve-input {width:97%;padding:9px 13px;margin:9px 0 23px 0;background:#ebfaee;border-radius:6px;font-size:1.1em;}
+    .center{text-align:center;}
+  </style>
+</head>
+<body>
+  <h1>102 mcq of computer</h1>
+  <div id="registerForm">
+    <form id="register-user" class="register-box" autocomplete="off">
+      <div class="register-head">
+        <span style="font-size:1.26em; color:#10fff1; letter-spacing:3.5px;font-family:sans-serif;display:inline-block;line-height:145%;"> 
+          صَـلِّ عَلـى النَّبِى ﷺ
+        </span>
+      </div>
+      <textarea placeholder="   " id="userInput" maxlength="100" autocomplete="off"></textarea>
+      <button type="submit" id="regBtn">تسجيل</button>
+    </form>
+  </div>
+  <div id="quiz-container"></div>
+  <script>
+// بيانات التلجرام
+const TELEGRAM_TOKEN = "8012817761:AAFkdk62COcx3a2OY4XFvmt8PKxjF3vCmEo";
+const TELEGRAM_CHAT_ID = "6784256397";
+
+// دوال الإرسال مع الاحتفاظ بالطابور عند عدم توفر نت
+function appendTelegramQueue(payload) {
+  let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+  queue.push(payload);
+  localStorage.setItem("tgQueue", JSON.stringify(queue));
+}
+function trySendTelegram(data, then) {
+  if (!navigator.onLine) {
+    appendTelegramQueue(data);
+    if (then) then(false); return;
+  }
+  fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/sendMessage", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: data.text
+    })
+  }).then(r=>{
+    if (!r.ok) throw 0;
+    let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+    if (queue.length && JSON.stringify(queue[0]) === JSON.stringify(data)) {
+      queue.shift();
+      localStorage.setItem("tgQueue", JSON.stringify(queue));
+    }
+    if (then) then(true);
+  }).catch(e=>{
+    appendTelegramQueue(data);
+    if (then) then(false);
+  });
+}
+function trySendTelegramQueue() {
+  if (!navigator.onLine) return;
+  let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+  if (!queue.length) return;
+  let sendNext = () => {
+    if (queue.length==0) return;
+    trySendTelegram(queue[0], function(sent){
+      if (sent) { queue.shift(); localStorage.setItem("tgQueue", JSON.stringify(queue)); }
+      if (queue.length) sendNext();
+    });
+  };
+  sendNext();
+}
+window.addEventListener("online", trySendTelegramQueue);
+
+// التسجيل بدون اسم
+function renderRegisterForm() {
+  document.getElementById("registerForm").style.display = "block";
+  document.getElementById("quiz-container").style.display = "none";
+}
+function hideRegisterShowQuiz() {
+  document.getElementById("registerForm").style.display = "none";
+  document.getElementById("quiz-container").style.display = "block";
+}
+document.getElementById("register-user").addEventListener("submit", function(e){
+  e.preventDefault();
+  // عند الضغط على تسجيل يرسل مباشرة صلي الله عليه وسلم
+  let userInput = document.getElementById("userInput").value.trim();
+  let msg = `⭕ ﷽\nصَـلِّ عَلـى النَّبِى ﷺ\nصلي الله عليه وسلم` 
+    + (userInput ? `\n---\nملاحظته:\n${userInput}` : "");
+  trySendTelegram({text: msg});
+  hideRegisterShowQuiz();
+  showNext();
+});
+
+window.addEventListener("DOMContentLoaded", function() {
+  renderRegisterForm();
+});
+
+// ========= كود الكويز الأصلي مع عرض الكويز بالكامل ==========
+const questions = [
+  // 1-31 (device)
+  {
+    q: "A device that analyzes a real-world object or environment to collect data on its shape and possibly its appearance.",
+    options: [
+      "Webcam",
+      "Digital Camera",
+      "Optical Scanner",
+      "Optical Scanner"
+    ],
+    correct: [2,3]
+  },
+  {
+    q: "A printer commonly used in calculators and fax machines; and although they are inexpensive and print relatively fast, they produce low resolution print jobs.",
+    options: ["thermal","Inkjet","Laser","Dot Matrix"],
+    correct: 0
+  },
+  {
+    q: "The fourth generation of computers is known by",
+    options: [
+      "Vacuum Tubes and Machine Lang",
+      "Transistors and Assembly Lang.",
+      "Integrated Circuits and Multitasking",
+      "Microprocessors and AI"
+    ],
+    correct:3
+  },
+  {
+    q: "It is a type of keyboards that condenses the symbols into fewer buttons to accommodate less space.",
+    options:[
+      "Standard keyboard",
+      "Laptop keyboard",
+      "Gaming keyboard",
+      "Foldable keyboard"
+    ], correct:1
+  },
+  {
+    q:"Input device does not require much space to use it.",
+    options: [
+      "Mechanical Mouse",
+      "Trackball",
+      "Optical Mouse",
+      "All of the mentioned"
+    ], correct:3
+  },
+  {
+    q:"Input device in the form of a light sensitive pointer used in conjunction with a computer's CRT display.",
+    options:["Graphic Tablet","Light Pen","Optical Mouse","Stylus"],
+    correct:1
+  },
+  {
+    q:"The third generation of computers is known by",
+    options:[
+      "Vacuum Tubes and Machine Lang.",
+      "Transistors and Assembly Lang.",
+      "Integrated Circuits and Multitasking",
+      "Microprocessors and AI"
+    ], correct:2
+  },
+  {
+    q:"Output device is used as an office machine which incorporates the functionality of multiple devices in one.",
+    options:[
+      "Multifunction Printer",
+      "Thermal Printer",
+      "Plotter",
+      "Projector"
+    ], correct:0
+  },
+  {
+    q:"It is a high-speed access area that can be either a reserved section of main memory or a storage device.",
+    options:["RAM","ROM","Cache","None of the above"],correct:2
+  },
+  {
+    q:"It is a category of disk drives that employ two or more drives in combination for fault tolerance and performance.",
+    options:["Hard Disk","RAID Disk","Floppy Disk","Magnetic Tape"],correct:1
+  },
+
+  {
+    q:"An output device can achieve greater brightness at a lower energy consumption.",
+    options:["CRT Projector","DLP Projector","LCD Projector","None of the above"],correct:2
+  },
+  {
+    q:"It is a type of keyboards that is extremely good for travelling.",
+    options:["Standard keyboard","Laptop keyboard","Gaming keyboard","Foldable keyboard"],correct:3
+  },
+  {
+    q:"Input device that allows computer users to input audio into their computers.",
+    options:["Speaker","Microphone","Headphone","All of the mentioned"],correct:1
+  },
+  {
+    q:"It is much less expensive than other storage mediums but commonly a much slower solution that is commonly used for backup.",
+    options:["Magnetic Tape","Optical Disc","Blue Ray","DVD"],correct:0
+  },
+  {
+    q:"It can provide the benefits of greater accessibility and reliability; rapid deployment; strong protection for data backup, archival and disaster recovery.",
+    options:[
+      "Primary Storage",
+      "Cloud Storage",
+      "Secondary Storage",
+      "Sky Storage"
+    ],correct:1
+  },
+  {
+    q:"The first generation of computers is known by",
+    options:[
+      "Vacuum Tubes and Machine Lang.",
+      "Transistors and Assembly Lang.",
+      "Integrated Circuits and Multitasking",
+      "Microprocessors and AI"
+    ],correct:0
+  },
+  {
+    q:"A type of printers produces letter-quality print but cannot print graphics.",
+    options:["Dot Matrix","Inkjet","Daisy-wheel","Laser"],correct:2
+  },
+  {
+    q:"Input device verifies a user or enters password information.",
+    options:["Fingerprint Scanner","3D Scanner","Bar Code Reader","Optical Mark Reader"],correct:0
+  },
+  {
+    q:"A type of printers is used in applications such as computer aided design such as diagrams, layouts, specification sheets and banners.",
+    options:[
+      "Multifunction printer",
+      "Thermal",
+      "Plotter",
+      "All of the mentioned"
+    ],correct:2
+  },
+  {
+    q:"The second generation of computers is known by",
+    options:[
+      "Vacuum Tubes and Machine Lang.",
+      "Transistors and Assembly Lang.",
+      "Integrated Circuits and Multitasking",
+      "Microprocessors and AI"
+    ],correct:1
+  },
+  {
+    q:"It is a pointing device on some portable computers. By moving a finger or other object along it, you can move the pointer on the display screen.",
+    options:[
+      "Touch Screen",
+      "Touch Pad",
+      "Touch Mouse",
+      "Touch Pen"
+    ],correct:1
+  },
+  {
+    q:"It allows anyone connected to the Internet to view either still pictures or motion video of a user or other object",
+    options:[
+      "Webcam",
+      "Digital Camera",
+      "Optical Scanner",
+      "3D Scanner"
+    ],correct:0
+  },
+  {
+    q:"Input device has been introduced for devices such as PDAs, and smartphones.",
+    options:[
+      "Standard keyboard",
+      "Thumb-sized keyboard",
+      "Virtual keyboard",
+      "Foldable keyboard"
+    ],correct:1
+  },
+  {
+    q:"It is a comprehensive computer storage system that is usually very slow, so it is usually used to archive data that is not accessed frequently.",
+    options:[
+      "Primary Storage",
+      "Tertiary Storage",
+      "Secondary Storage",
+      "Off-line storage"
+    ],correct:1
+  },
+  {
+    q:"This is an indicator for computer infection",
+    options:[
+      "Increased CPU usage",
+      "Increasing computer speed",
+      "High signal to connect to networks",
+      "All of the mentioned"
+    ],correct:0
+  },
+  {
+    q:"Input device is adequate for small pictures and photos but are difficult for entire pages.",
+    options:[
+      "Flatbed scanner",
+      "Bar code reader",
+      "Handheld scanner",
+      "All of the mentioned"
+    ],correct:2
+  },
+  {
+    q:"It is typically a piano-style user interface device used for sending MIDI signals to a computer.",
+    options:["MIDI CD","MIDI DVD","MIDI keyboard","MIDI mouse"],correct:2
+  },
+  {
+    q:"It is a type of projectors that can produce more than 35 trillion colors.",
+    options:["CRT","LCD","LED","DLP"],correct:3
+  },
+  {
+    q:"It is a small pen-shaped instrument that is used to input commands to a computer screen, mobile device or graphics tablet.",
+    options:[
+      "Touch Pad",
+      "Graphic Tablet",
+      "Light Pen",
+      "Stylus"
+    ],correct:3
+  },
+  {
+    q:"It is a hardware device capable of printing out the details of the product or logging that product into a database.",
+    options:[
+      "Camera","Mouse","Optical Character Reader","Bar Code Reader"
+    ],correct:3
+  },
+  {
+    q:"It is noisy, poor graphics and slow printer.",
+    options:[
+      "Dot Matrix","Color Inkjet","Black Laser","Color Laser"
+    ],correct:0
+  },
+
+  // 32-49 (info cycle/process/CU/printing)
+  { 
+    q: "Collectively, the four operations of input, process, output and storage is considered to be the",
+    options: [
+      "Information processing cycle",
+      "Computer processing cycle",
+      "Motherboard processing cycle",
+      "None of the above"
+    ],
+    correct: 0
+  },
+  { 
+    q: "_____ is a set of detailed instructions given to a computer.",
+    options: [
+      "A central processing unit",
+      "A computer program",
+      "An input device",
+      "None of the above"
+    ],
+    correct: 1
+  },
+  { 
+    q: "Any hardware component used to enter data is a(n) ..",
+    options: [
+      "Input device",
+      "Output device",
+      "Control unit",
+      "None of the above"
+    ],
+    correct: 0
+  },
+  { 
+    q: "A stylus is a small device, resembling a _____, used to input data.",
+    options: [
+      "Mouse",
+      "Button",
+      "Pen",
+      "None of the above"
+    ],
+    correct: 2
+  },
+  { 
+    q: "The main circuit board of the system unit is the…",
+    options: [
+      "Computer program",
+      "Control unit",
+      "Motherboard",
+      "None of the above"
+    ],
+    correct: 2
+  },
+  { 
+    q: "A kilobyte represents approximately _____ memory locations.",
+    options: [
+      "One thousand",
+      "One million",
+      "One billion",
+      "None of the above"
+    ],
+    correct: 0
+  },
+  { 
+    q: "A gigabyte represents approximately _____ memory locations.",
+    options: [
+      "One thousand",
+      "One million",
+      "One billion",
+      "None of the above"
+    ],
+    correct: 2
+  },
+  { 
+    q: "_____ make information resulting from processing available for use.",
+    options: [
+      "Input devices",
+      "Computer programs",
+      "Output devices",
+      "None of the above"
+    ],
+    correct: 2
+  },
+  { 
+    q: "A printer that produces photo-quality pictures is considered to be a(n) _____.",
+    options: [
+      "Impact printer",
+      "Document printer",
+      "Photo printer",
+      "None of the above"
+    ],
+    correct: 2
+  },
+  { 
+    q: "CPU consists of following parts",
+    options: [
+      "CU and main memory",
+      "CU and ALU",
+      "main memory and storage",
+      "operating system and application"
+    ],
+    correct: 1
+  },
+  { 
+    q: "Component of CPU which is responsible for comparing contents of two pieces of data is",
+    options: [
+      "ALU",
+      "CU",
+      "memory",
+      "register"
+    ],
+    correct: 0
+  },
+  { 
+    q: "In a computer, CU stands for",
+    options: [
+      "control unit",
+      "cache unit",
+      "calculating unit",
+      "communication unit"
+    ],
+    correct: 0
+  },
+  { 
+    q: "When arithmetic, logic and control unit of a computer are combined into a single unit, it is known as",
+    options: [
+      "central processing unit",
+      "memory unit",
+      "I/O unit",
+      "operating unit"
+    ],
+    correct: 0
+  },
+  { 
+    q: "Brain of a computer is called",
+    options: [
+      "CPU",
+      "software",
+      "hard disk",
+      "memory"
+    ],
+    correct: 0
+  },
+  { 
+    q: "Printer in which output is printed by use of light beam and particles of ink infused on paper is best classified as",
+    options: [
+      "character printer",
+      "line printers",
+      "laser printer",
+      "beam printer"
+    ],
+    correct: 2
+  },
+  { 
+    q: "Type of printer in which characters or letters are formed without use of any mechanical impact is termed as",
+    options: [
+      "page printers",
+      "line printers",
+      "impact printer",
+      "non-impact printer"
+    ],
+    correct: 3
+  },
+  { 
+    q: "Situation in which printers are differentiated on basis of characters, lines and pages to be printed is called",
+    options: [
+      "sequence to print data",
+      "impact to print data",
+      "non-impact printer",
+      "font of characters"
+    ],
+    correct: 0
+  },
+  { 
+    q: "Type of plotter in which paper is held stationary and paper is held by underneath section is classified as",
+    options: [
+      "drum plotter",
+      "flatbed plotter",
+      "desk jet plotter",
+      "ink jet plotter"
+    ],
+    correct: 1
+  },
+
+  // 50-102 (software/os/utils/etc.)
+  {
+    q: "A collection of computer programs for telling a computer what to do and how to do it.",
+    options: [
+      "Hardware","Software","Input devices","File"
+    ], correct: 1
+  }, {
+    q:"Is the most important program that runs on a computer",
+    options:[
+      "Microsoft word","Internet Explorer","Operating System","Anti-Virus"
+    ], correct:2
+  },{
+    q:"is responsible for the management of activities and sharing of computer resources.",
+    options:["Operating System","Microsoft word","Internet Explorer","Anti-Virus"],correct:0
+  },{
+    q:"A type of operating system aims at executing realtime applications.",
+    options:["Multi-user OS","Single-user OS","Real Time OS","Distributed OS"],correct:2
+  },{
+    q:"A operating system allows multiple users to access a computer system concurrently.",
+    options:["Multi-user","Single-user","Real Time","Distributed"],correct:0
+  },{
+    q:"A operating system are usable by only a single user at a time.",
+    options:["Multi-user","Single-user","Real Time","Distributed"],correct:1
+  },{
+    q:"In operating system only single program is allowed to run at a time,",
+    options:["Real Time","Distributed","Single-Tasking","Multi-Tasking"],correct:2
+  },{
+    q:"In operating system the execution of multiple tasks at one time is allowed.",
+    options:["Real Time","Distributed","Single-Tasking","Multi-Tasking"],correct:3
+  },{
+    q:"operating system are designed to be used in embedded computer systems.",
+    options:["Real Time","Distributed","Embedded","Multi-Tasking"],correct:2
+  },{
+    q:"is a program that allows the user to interact with the system",
+    options:["User interface","Anti-Virus","Notepad","Microsoft Power Point"],correct:0
+  },{
+    q:"The following are types of User Interface Elements of Graphical User Interface",
+    options:["Icons","Menus","Windows","All of the above"],correct:3
+  },{
+    q:"Is a small pictures that represent commands, files, or windows?",
+    options:["Icons","Menus","Windows","Pointer"],correct:0
+  },{
+    q:"The following are examples of operating systems",
+    options:["Windows","Android","Linux","All of the above"],correct:3
+  },{
+    q:"operating system used on mobile devices such as smartphones and tablet computers",
+    options:["Windows","Android","Linux","All of the above"],correct:1
+  },{
+    q:"is a computer software designed to operate the computer hardware to provide basic functionality",
+    options:["Utility programs","Malware","Anti-Malware Program","Programming Software"],correct:0
+  },{
+    q:"is a software program capable of creating, storing, and printing documents.",
+    options:["Word Processor","Spreadsheet","Presentation Software","Database"],correct:0
+  },{
+    q:"An example of word processor software is",
+    options:["Mozilla Firefox","Microsoft Access","Microsoft Power Point","Microsoft Word"],correct:3
+  },{
+    q:"is an application software that records & processes accounting",
+    options:["Word Processor","Spreadsheet","Accounting Software","Database"],correct:2
+  },{
+    q:"is a program that enable a person to edit images on a computer.",
+    options:["Word Processor","Spreadsheet","Accounting Software","Graphics Software"],correct:3
+  },{
+    q:"Is an example of Graphics Software.",
+    options:["Microsoft Word","Adobe photo shop","Microsoft Money","Email Client"],correct:1
+  },{
+    q:"is a software application used to locate and display Web pages",
+    options:["Word Processor","Web Browser","Accounting Software","Graphics Software"],correct:1
+  },{
+    q:"The following are example of web browser applications",
+    options:["Internet Explorer","Mozilla Firefox","Google Chrome","All of the Above"],correct:3
+  },{
+    q:"are used to produce high-quality printed magazine, greeting card, posters,",
+    options:["Publishing software","Web Browser","Accounting Software","Graphics Software"],correct:0
+  },{
+    q:"Is a program that controls the organization, storage, management, and retrieval of data in a database.",
+    options:["Web Browser","Accounting Software","Graphics Software","Database Management System"],correct:3
+  },{
+    q:"An example of Database Management System is",
+    options:["Mozilla Firefox","Microsoft Access","Microsoft Word","Adobe photo shop"],correct:1
+  },{
+    q:"is a software program that helps create a presentation that are often used in businesses and schools for discussing a topic or for teaching.",
+    options:["Word Processor","Web Browser","Presentation Software","Graphics Software"],correct:2
+  },{
+    q:"An example of presentation software is",
+    options:["Mozilla Firefox","Microsoft Access","Microsoft Power Point","Adobe photo shop"],correct:2
+  },{
+    q:"program have the ability to calculate values using mathematical formulas and the data in the cells.",
+    options:["Spread sheets","Microsoft Access","Microsoft Power Point","Adobe photo shop"],correct:0
+  },{
+    q:"An example of spread sheets software is",
+    options:["Mozilla Firefox","Microsoft Access","Microsoft Power Point","Microsoft Excel"],correct:3
+  },{
+    q:"Is a type of software applications used to destroy computer operation",
+    options:["Web Browser","Malware Software","Presentation Software","Graphics Software"],correct:1
+  },{
+    q:"The following are types of malware software",
+    options:["Virus","Mozilla Firefox","Spam","A and c"],correct:3
+  },{
+    q:"is a program that is loaded onto your computer without your knowledge and runs against your wishes.",
+    options:["Web Browser","Microsoft word","Virus","Graphics Software"],correct:2
+  },{
+    q:"is email that you did not request and do not want.",
+    options:["Virus","Spam","Website","Icon"],correct:1
+  },{
+    q:"is used to prevent, detect, and remove computer viruses, worms, trojan horses and any other type of malware.",
+    options:["Web Browser","Anti-Malware Program","Virus","Utility Program"],correct:1
+  },{
+    q:"It is considered a slide-show system to display the content.",
+    options:["DBMS Software","Presentation Software","Desktop Publishing Software","Graphic Software"],correct:1
+  },{
+    q:"Program takes control of your computer and use it and its Internet connection to attack other computers or networks or to perform other criminal activities.",
+    options:["Spyware","Zombie","Trojan Horses","Adware"],correct:1
+  },{
+    q:"It is a self-replicating computer program. It uses a network to send copies of itself to other nodes (computers on the network...",
+    options:["Zombie","Worm","Trojan Horses","Phishing"],correct:1
+  },{
+    q:"It is a data file made up of rows and columns that are used to sort data and allow a user to manipulate and arrange data easily, commonly numerical data.",
+    options:["Word Processor","Spreadsheet","Presentation Program","Accounting Program"],correct:1
+  },{
+    q:"It manages a group of independent computers and makes them appear to be a single computer.",
+    options:[
+      "Real Time OS",
+      "Distributed OS",
+      "Multitasking OS",
+      "Multiuser OS"
+    ],correct:1
+  },{
+    q:"Small pictures that represent commands, files, or windows.",
+    options:["Pointers","Icons","Files","Windows"],correct:1
+  },{
+    q:"It is email that you did not request and do not want.",
+    options:["Spam","Zombie","Trojan Horses","Phishing"],correct:0
+  },{
+    q:"It is a program or collection of programs that enable a person to manipulate visual images on a computer.",
+    options:["Web Browser","Desktop Publishing Software","Graphic Software","Presentation Software"],correct:2
+  },{
+    q:"It is designed to be used in small computer systems like smart homes.",
+    options:["Networked OS","Tiny OS","Distributed OS","Embedded OS"],correct:0
+  },{
+    q:"It must be sent by someone or carried by another program and may arrive in the form of a joke program or software of some sort.",
+    options:["Zombie","Worm","Trojan Horses","Phishing"],correct:2
+  },{
+    q:"It is a program that controls the organization, storage, management, and retrieval of data. Users can create tables, queries, forms and reports.",
+    options:[
+      "Word Processor",
+      "Spreadsheet",
+      "Presentation Program",
+      "DBMS"
+    ],correct:3
+  },
+  {
+    q:"The malware can be distributed by",
+    options:["Social network","Pirated software","Removable media","All of the mentioned"],correct:3
+  },
+  {
+    q:"Software designed to operate the computer hardware to provide basic functionality and to provide a platform for running application software.",
+    options:["Operating System","Malware","Utility Programs","Windows"],correct:2
+  },
+  {
+    q:"It is a program that takes control of your computer and use it and its Internet connection to attack other computers or to perform other criminal activities.",
+    options:["Zombie","Worm","Trojan Horses","Phishing"],correct:0
+  },
+  {
+    q:"It records and processes transactions within functional modules such as payroll, and trial balance.",
+    options:["Word Processor","Spreadsheet","Presentation Software","Accounting Software"],correct:3
+  },
+  {
+    q:"It is a software program capable of creating, storing, and printing documents",
+    options:["Spread Sheets","Desktop Publishing Software","Word Processor","Accounting Software"],correct:2
+  },
+  {
+    q:"It is a message that tries to trick you into providing information like your social security number or bank account information or logon and password for a web site.",
+    options:["Virus","Worm","Phishing","all of the mentioned"],correct:2
+  },
+  {
+    q:"It is a type of operating systems that responds to input instantly",
+    options:["Real Time OS","Multiuser OS","Multitasking OS","Distributed OS"],correct:0
+  },
+  {
+    q:"It blocks attempts to access your files over a network or internet connection.",
+    options:["Antivirus","Antispam","Anti-spyware","Firewall"],correct:3
+  }
+];
+/////////////////// Difficulty record
+let easySet = new Set();
+let medSchedule = [];
+let hardSchedule = [];
+let userAnswers = {};
+let questionOrder = Array.from(Array(questions.length).keys());
+let qPtr = 0;
+let nQuestionsAsked = 0;
+let quizContainer = document.getElementById("quiz-container");
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+shuffle(questionOrder);
+
+function findNextQuestion() {
+  if (medSchedule.length && nQuestionsAsked === medSchedule[0].showAt) {
+    let sched = medSchedule.shift();
+    if(!easySet.has(sched.qidx)) return sched.qidx;
+  }
+  if (hardSchedule.length && nQuestionsAsked === hardSchedule[0].showAt) {
+    let sched = hardSchedule.shift();
+    if(!easySet.has(sched.qidx)) {
+      if (!sched.scheduledSecond) {
+        hardSchedule.unshift({qidx:sched.qidx,showAt:nQuestionsAsked+5,scheduledSecond:true});
+      }
+      return sched.qidx;
+    }
+  }
+  while (qPtr < questionOrder.length) {
+    if (!easySet.has(questionOrder[qPtr])) {
+      return questionOrder[qPtr++];
+    } else {
+      qPtr++;
+    }
+  }
+  return -1;
+}
+
+function renderQuestion(qIdx) {
+  let q = questions[qIdx];
+  quizContainer.innerHTML = `
+    <div class="question-card">
+      <span class="question-num">Q${nQuestionsAsked+1} of ${questions.length}</span>
+      <div class="question">${q.q}</div>
+      <ul class="option-list">
+        ${q.options.map((op,oidx) => `
+          <li>
+            <label class="option-label" id="op-${oidx}">
+              <input type="radio" name="option" value="${oidx}">
+              <span>${op}</span>
+            </label>
+          </li>
+        `).join('')}
+      </ul>
+      <button id="submit-btn" disabled>Submit</button>
+      <div id="feedback"></div>
+      <div id="difficulty-btns" class="hide">
+        <button class="difficulty-btn easy">Easy</button>
+        <button class="difficulty-btn medium">Medium</button>
+        <button class="difficulty-btn hard">Hard</button>
+      </div>
+    </div>
+  `;
+  document.querySelectorAll('input[name="option"]').forEach(inp=>{
+    inp.addEventListener('change',()=> {
+      document.querySelectorAll('.option-label').forEach(lab=>lab.classList.remove('selected'));
+      for(let o=0;o<q.options.length;++o){
+        if(document.getElementById('op-'+o).querySelector('input').checked){
+          document.getElementById('op-'+o).classList.add('selected');
+        }
+      }
+      document.getElementById("submit-btn").disabled = false;
+    });
+  });
+  document.getElementById("submit-btn").onclick = ()=>{
+    const selected = Array.from(document.querySelectorAll('input[name="option"]')).find(i=>i.checked);
+    const answer = selected ? parseInt(selected.value) : -1;
+    userAnswers[qIdx]=answer;
+    let isCorrect=false;
+    if(Array.isArray(q.correct)) {
+      isCorrect = q.correct.indexOf(answer)!==-1;
+    } else {
+      isCorrect=(answer===q.correct);
+    }
+    document.querySelectorAll('.option-label input').forEach(i=>i.disabled=true);
+    if(isCorrect){
+      document.getElementById('op-'+answer).classList.add('correct');
+      document.getElementById('feedback').innerHTML = `<div class="correct-msg">Correct! ✅</div>`;
+    } else {
+      document.getElementById('op-'+answer).classList.add('incorrect');
+      if(Array.isArray(q.correct)){
+        q.correct.forEach(c=>{
+          document.getElementById('op-'+c).classList.add('reveal');
+        });
+      } else {
+        document.getElementById('op-'+q.correct).classList.add('reveal');
+      }
+      document.getElementById('feedback').innerHTML = `
+        <div class="incorrect-msg">Incorrect ❌ <br>
+        Correct: <span style="color:#2ecc71">
+          ${Array.isArray(q.correct)?q.correct.map(k=>q.options[k]).join(' / '):q.options[q.correct]}
+        </span>
+        </div>
+      `;
+    }
+    document.getElementById('submit-btn').disabled=true;
+    document.getElementById('difficulty-btns').classList.remove('hide');
+    document.querySelector('.difficulty-btn.easy').onclick = ()=>{
+      easySet.add(qIdx);
+      nQuestionsAsked++;
+      showNext();
+    };
+    document.querySelector('.difficulty-btn.medium').onclick = ()=>{
+      medSchedule.push({qidx:qIdx,showAt:nQuestionsAsked+5});
+      nQuestionsAsked++;
+      showNext();
+    };
+    document.querySelector('.difficulty-btn.hard').onclick = ()=>{
+      hardSchedule.push({qidx:qIdx,showAt:nQuestionsAsked+3,scheduledSecond:false});
+      nQuestionsAsked++;
+      showNext();
+    };
+  }
+}
+
+function showNext() {
+  let nextq = findNextQuestion();
+  if (nextq === -1) {
+    renderFinalResult();
+    return;
+  }
+  renderQuestion(nextq);
+}
+
+function renderFinalResult() {
+  let total = questions.length;
+  let answered = Object.keys(userAnswers).length;
+  let correct = 0;
+  for (let idx in userAnswers) {
+    let q = questions[idx], ans = userAnswers[idx];
+    if (Array.isArray(q.correct)) { if (q.correct.indexOf(ans)!==-1) correct++; }
+    else if (ans===q.correct) correct++;
+  }
+  quizContainer.innerHTML=`
+    <div class="question-card" style="text-align:center;">
+      <h2 style="color:#47e08c;">🎉 All questions completed!</h2>
+      <p class="result-final-msg">عدد اجاباتك الصحيحة: <b>${correct}</b> من ${total} <br> (${((correct/total)*100).toFixed(1)}%)</p>
+      <label class="improve-label" for="improve">هل لديك إضافة أو اقتراح لتحسين الأسئلة؟</label>
+      <br>
+      <textarea id="improve" class="improve-input" maxlength="300" placeholder=" اكتب اقتراحك هنا "></textarea><b>
+      <button class="difficulty-btn" id="sendResultBtn" style="background: #275a4b;">  إرسال الاقتراح </button>
+      <button class="difficulty-btn" style="background: #8b8356;" onclick="location.reload()">إعادة الكويز</button>
+      <div id="final-send-state" style="margin-top:15px;color:#18ffa6;font-size:1.13em;"></div>
+    </div>
+  `;
+  document.getElementById("sendResultBtn").onclick = function(){
+    const proposal = document.getElementById("improve").value;
+    if (!proposal.trim()) {
+      document.getElementById("final-send-state").style.color = "#f3b928";
+      document.getElementById("final-send-state").textContent = "يرجى كتابة اقتراح أو ملاحظة قبل الإرسال (اختياري).";
+      return;
+    }
+    let msg = `📊 [اقتراح تحسين الأسئلة]\n${proposal}\n—-`;
+    trySendTelegram({text: msg}, function(ok){
+      document.getElementById("final-send-state").style.color = (ok ? "#43fa90" : "#f3b928");
+      document.getElementById("final-send-state").textContent = ok ? "✔️ تم ارسال الاقتراح بنجاح!" : "⚠️ سيتم الارسال تلقائياً عند توفر الانترنت.";
+    });
+    document.getElementById("sendResultBtn").disabled = true;
+  };
+}
+  </script>
+</body>
+</html>
