@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>121 mcq of computer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* [نفس الـCSS السابق بدون تغيير] */
+    * { box-sizing: border-box; }
+    body {
+      background: #0f2027;
+      background: linear-gradient(to bottom right, #2c5364, #203a43, #0f2027);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0; min-height: 100vh;
+    }
+    h1 { color: #fff; text-align: center; margin-top: 30px; font-size: 2.7em; letter-spacing: 2px; text-shadow: 2px 4px 14px rgba(0,0,0,0.34);}
+    #quiz-container { max-width: 720px; margin: 40px auto; padding: 24px; background: rgba(255,255,255,0.10); border-radius: 22px; box-shadow: 0 8px 42px rgba(30,30,85,0.23); min-height: 480px; position: relative;}
+    .question-card { background: #212e36; border-radius: 18px; box-shadow: 0 2px 16px rgba(0,0,0,.08); padding: 36px 28px 30px 28px; margin-bottom: 18px; margin-top: 0; font-size: 1.35em; min-height: 240px; color: #f1f6f9; position: relative; z-index: 1; transition: box-shadow .2s; font-weight: 470;}
+    .question-num { font-size:1.22em;color:#38a3a5;margin-bottom:10px;display:block; font-weight: bold;}
+    .option-list { margin: 0; padding: 0; list-style: none; margin-top: 2px;}
+    .option-list li { padding: 0; margin: 10px 0;}
+    .option-label { display: flex; align-items: center; background: rgba(255,255,255,0.04); border-radius: 9px; padding: 14px 18px; margin: 5px 0; cursor: pointer; transition: background .15s, color .2s; font-size: 1.12em; border: 2.3px solid transparent; position: relative;}
+    .option-label input[type="radio"] { accent-color: #6ee7b7; margin-right: 15px; transform: scale(1.25);}
+    .option-label.selected { background: #264653; color: #1db496; border-color: #3edfb6;}
+    .option-label.correct { background: rgba(46, 204, 113,0.27) !important; border-color: #2ecc7138 !important; color: #36fa95 !important;}
+    .option-label.incorrect { background: rgba(220, 53, 69, 0.20)!important; border-color: #dc354577 !important; color:#fb6161!important}
+    .option-label.reveal { border-color: #44c57b !important; color: #57ffc9 !important; font-weight: bold; box-shadow: 0 2px 8px 0 #15fcac1a;}
+    .hide { display: none !important;}
+    #submit-btn, .difficulty-btn { margin-top: 28px; padding: 17px 36px; border: none; border-radius: 9px; font-size: 1.23em; cursor: pointer; font-weight: 700; letter-spacing: 1.9px; box-shadow: 0 2px 18px #07dda322; transition: background .18s, color .17s, box-shadow .2s; outline:none;}
+    #submit-btn { background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%); color: #222; min-width: 210px;}
+    #submit-btn:disabled { background: #3a6957; color: #cfc; opacity: 0.48; cursor: not-allowed;}
+    .difficulty-btn { background: #181820; color: #fff; margin-right: 16px; font-size: 1em; box-shadow: 0 2px 14px #3332;}
+    .difficulty-btn.easy { background-color: #45daad;}
+    .difficulty-btn.medium { background-color: #fecc31;color:#3d2d0d;}
+    .difficulty-btn.hard { background-color: #ea5353;}
+    .correct-msg, .incorrect-msg { font-size: 1.34em; margin-top: 20px; font-weight: bold; padding: 8px 0; text-align:center;}
+    .correct-msg { color: #00e48f; background: rgba(46, 204, 113, 0.17); border-radius: 7px;}
+    .incorrect-msg { color: #ea5353; background: rgba(234, 83, 83, 0.13); border-radius: 7px;}
+    .register-box {background:#24374e;border-radius:16px; padding:25px 18px 16px 18px;max-width:400px;margin:18px auto 28px auto;box-shadow:0 2px 24px #01281f51;}
+    .register-head {font-size:1.27em;text-align:center;font-weight:bold;color:#37dfbb;letter-spacing:2px;margin-bottom:15px;line-height:180%;}
+    .register-box textarea { width: 90%; font-size:1.17em; padding:11px 14px; margin:8px 0 16px 0; border-radius:7px; border:2px solid #24cfa5; background:#fcfefe; resize: vertical; min-height:32px; }
+    .register-box button {font-size:1.1em;background:#33b06c;color:white;border-radius:8px; border:none;padding:10px 23px;cursor:pointer;box-shadow:0 2px 8px #262;}
+    .register-box button:disabled{opacity:.64;background:#629291;}
+    @media (max-width: 740px) {#quiz-container {max-width: 99vw;padding:10px;} .question-card {padding: 18px 5vw;}}
+    @media (max-width: 480px) {h1 {font-size:2em;} #quiz-container {padding:3vw;} .question-card {padding:9px 2vw;font-size:1.11em;} #submit-btn, .difficulty-btn{font-size:1em;padding:13px 19px;} .option-label{font-size:1em;}}
+    .result-final-msg {font-size:1.22em;color:#88ffae;line-height:160%;margin:10px 0 20px 0;}
+    .improve-label {color:#fcd14b;font-weight:bold;font-size:1.08em;}
+    .improve-input {width:97%;padding:9px 13px;margin:9px 0 23px 0;background:#ebfaee;border-radius:6px;font-size:1.1em;}
+    .center{text-align:center;}
+  </style>
+</head>
+<body>
+  <h1>131 mcq of computer</h1>
+  <div id="registerForm">
+    <form id="register-user" class="register-box" autocomplete="off">
+      <div class="register-head">
+        <span style="font-size:1.26em; color:#10fff1; letter-spacing:3.5px;font-family:sans-serif;display:inline-block;line-height:145%;"> 
+          صَـلِّ عَلـى النَّبِى ﷺ
+        </span>
+      </div>
+      <textarea placeholder="   " id="userInput" maxlength="100" autocomplete="off"></textarea>
+      <button type="submit" id="regBtn">تسجيل</button>
+    </form>
+  </div>
+  <div id="quiz-container"></div>
+  <script>
+// بيانات التلجرام
+const TELEGRAM_TOKEN = "8012817761:AAFkdk62COcx3a2OY4XFvmt8PKxjF3vCmEo";
+const TELEGRAM_CHAT_ID = "6784256397";
+function appendTelegramQueue(payload) {
+  let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+  queue.push(payload);
+  localStorage.setItem("tgQueue", JSON.stringify(queue));
+}
+function trySendTelegram(data, then) {
+  if (!navigator.onLine) {
+    appendTelegramQueue(data);
+    if (then) then(false); return;
+  }
+  fetch("https://api.telegram.org/bot" + TELEGRAM_TOKEN + "/sendMessage", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: data.text
+    })
+  }).then(r=>{
+    if (!r.ok) throw 0;
+    let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+    if (queue.length && JSON.stringify(queue[0]) === JSON.stringify(data)) {
+      queue.shift();
+      localStorage.setItem("tgQueue", JSON.stringify(queue));
+    }
+    if (then) then(true);
+  }).catch(e=>{
+    appendTelegramQueue(data);
+    if (then) then(false);
+  });
+}
+function trySendTelegramQueue() {
+  if (!navigator.onLine) return;
+  let queue = JSON.parse(localStorage.getItem("tgQueue") || "[]");
+  if (!queue.length) return;
+  let sendNext = () => {
+    if (queue.length==0) return;
+    trySendTelegram(queue[0], function(sent){
+      if (sent) { queue.shift(); localStorage.setItem("tgQueue", JSON.stringify(queue)); }
+      if (queue.length) sendNext();
+    });
+  };
+  sendNext();
+}
+window.addEventListener("online", trySendTelegramQueue);
+
+// التسجيل بدون اسم
+function renderRegisterForm() {
+  document.getElementById("registerForm").style.display = "block";
+  document.getElementById("quiz-container").style.display = "none";
+}
+function hideRegisterShowQuiz() {
+  document.getElementById("registerForm").style.display = "none";
+  document.getElementById("quiz-container").style.display = "block";
+}
+document.getElementById("register-user").addEventListener("submit", function(e){
+  e.preventDefault();
+  let userInput = document.getElementById("userInput").value.trim();
+  let msg = `⭕ ﷽\nصَـلِّ عَلـى النَّبِى ﷺ\nصلي الله عليه وسلم` 
+    + (userInput ? `\n---\nملاحظته:\n${userInput}` : "");
+  trySendTelegram({text: msg});
+  hideRegisterShowQuiz();
+  showNext();
+});
+window.addEventListener("DOMContentLoaded", function() {
+  renderRegisterForm();
+});
+
+// ========= كود الكويز: وضع الأسئلة كاملة هنا ===========
+const questions = [
+  // ======= Section 1 =======
+  {q:"………… include documents, graphics, text files, presentations, audio clips, video clips, and other things that you can open, look at, and change by using one or more apps.", options:["File","Application","Desktop","Spam"], correct:0},
+  {q:"Files include:", options:["Documents","Worksheets","Graphics","All of Above"], correct:3},
+  {q:"Users can do the following on files", options:["Open","save","change","all of the above"], correct:3},
+  {q:"File Explorer displays a series of conceptual organizational systems,", options:["Quick Access:","This PC","Libraries","Network","all of the above"], correct:4},
+  {q:"The following are views available in windows explorer", options:["Icon","List","Details","all of the above"], correct:3},
+  {q:"……… is a folder created by windows for each user account to contain their personal folders.", options:["File","Program file","User Folder","Desktop"], correct:2},
+  {q:"Most of the critical operating system files are stored in this folder. You can look but do not touch.", options:["User Folder","Windows Folder","Program File Folder","Desktop"], correct:1},
+  {q:"Many apps install the files they need in subfolders of ………. ", options:["Program Files Folder","Windows Folder","Desktop","User Folder"], correct:0},
+  {q:"…………. displays a series of conceptual organizational systems, (displayed physical hard drives at the root of the file storage structure )", options:["Internet Explore","File Explorer","Control Panel","All of the above"], correct:1},
+  {q:"In windows 10, When you open windows explorer the following folders will be displayed:", options:["Quick Access","This PC","Libraries","All of the above"], correct:3},
+  {q:"A folder Contains links to folders and files that you access frequently or pin here for easy access",options:["Quick Access","Home Group","This PC","Network"], correct:0},
+  {q:"……….. Contains links to your user account– specific folders, and to the physical storage locations that are installed in or connected to your computer",options:["Quick Access","Home Group","This PC","Network"], correct:2},
+  {q:"…………… Displays a representation of other computers on your local area network",options:["Quick Access","Home Group","This PC","Network"], correct:3},
+  {q:"Displays a representation of other computers on your local area network that are joined to the network home group.",options:["Quick Access","Home Group","This PC","Network"], correct:1},
+  {q:"The file explorer window layout consists of the following elements:",options:["The ribbon","Navigation pane","Details pane","All of the above"], correct:3},
+  {q:"The ……… commands organized in groups on tabs.",options:["The ribbon","Navigation pane","Details pane","Content pan"], correct:0},
+  {q:"The ……… displays a hierarchical view of the physical and virtual storage structures available to the computer.",options:["The ribbon","Navigation pane","Details pane","Content pan"], correct:1},
+  {q:"The ……..displays the contents of the selected folder as a textual or iconic list.",options:["The ribbon","Navigation pane","Details pane","Content pan"], correct:3},
+  {q:"The ………. displays information details about the selected folder or file.",options:["The ribbon","Navigation pane","Details pane","Content pan"], correct:2},
+  {q:"The ………. displays a preview of the file that is selected in the content pane.",options:["The ribbon","Preview pane","Details pane","Content pan"], correct:1},
+  {q:"To start file explorer",options:["On the Start menu, select File Explorer.","On the taskbar, select the File Explorer button.","Select Win + E.","All of the above"], correct:3},
+  {q:"To display the contents of a folder in File Explorer",options:["In the Navigation pane, select the folder name.","Win + E","Start / control panel","Alt + F4"], correct:0},
+  {q:"The following views are available in windows:",options:["Icons","List","Details","All of the above"], correct:3},
+  {q:"In the ……… view the display an icon and name for each folder or file in the current folder.",options:["Icons","List","Details","Content"], correct:0},
+  {q:"Using ……., you can find apps, files, messages, and message attachments on your computer.",options:["Control Panel","User Folders","Windows Search","Internet Explorer"], correct:2},
+  {q:"To select all the items in a folder ",options:["Press Ctrl + A","Press F1","Press F2","Press Alt+ F4"], correct:0},
+  {q:"To copy selected items to the Clipboard",options:["Press Ctrl + A","Press F1","Right-click the selection, and then select Copy.","Press Alt+ F4"], correct:2},
+  {q:"To cut selected items to the Clipboard",options:["Press Ctrl + X","Press F1","Right-click the selection, and then select Copy.","Press Alt+ F4"], correct:0},
+  {q:"To paste items from the Clipboard",options:["Press Ctrl + X","Press F1","Right-click the selection, and then select Copy.","Press Ctrl + V"], correct:3},
+  {q:"To delete an item, select the item and",options:["Press the Delete key.","Press F1","Right-click the selection, and then select Copy.","Press Ctrl + V"], correct:0},
+  {q:"To restore a deleted item",options:["Select it from recycle bin and then click restore","Right-click the selection, and then select Copy","Press the Delete key.","Press F1"], correct:0},
+
+  // ======= Section 2 =======
+  {q:"The most common formatting options that apply to characters are font related:",options:["Font Name","Font Size","font Color","All the above"], correct:3},
+  {q:"Word 2010 saves document as what file type?",options:["Docx","Dot","Html","All of the above"], correct:0},
+  {q:"Set of buttons that invoke commands in a computer word processing document is called",options:["menu","button list","dialog","toolbar"],correct:3},
+  {q:"Special part of computer memory to temporarily hold information for later use is called",options:["ROM","clipboard","Mouse","Cache"],correct:1},
+  {q:"To change the font on a Word document, you would need to click on the _____________ toolbar.",options:["Tools","View","Formatting","Edit"],correct:2},
+  {q:"Predefined set of formatting options that have been named and saved.",options:["Style","Format","View","Toolbar"],correct:0},
+  {q:"Controls the amount of space between each letter.",options:["Toolbar","Character spacing","Drawing toolbar","Options spacing"],correct:1},
+  {q:"Single, double, or thick dotted lines that appear around words or paragraphs.",options:["Text Box","Drawing","Toolbar","Border"],correct:3},
+  {q:"Highlighting a block of text.",options:["Text Box","Highlighting","Selecting","Drawing"],correct:1},
+  {q:"Removes text from a document and places it on the clipboard.",options:["Cut","Copy","Paste","Format"],correct:0},
+  {q:"Using the keyboard only, which buttons would you punch to select all the text in a document?",options:["CTRL A","CTRL O","CTRL S","CTRL L"],correct:0},
+  {q:"You can find the icon to 'Underline' a word in this 'Ribbon'.",options:["Home","Insert","Review"],correct:0},
+  {q:"You can find the icon to 'Change' the 'Size ' of the letters in this 'Ribbon'.",options:["Insert","View","Home"],correct:2},
+  {q:"You can add a picture from 'Clip Art' in this 'Ribbon'.",options:["Home","Review","Insert"],correct:2},
+  {q:"You can change the 'Font' in this 'Ribbon'.",options:["Insert","Review","Home"],correct:2},
+  {q:"You can add 'Smart art' from this 'Ribbon'.",options:["Insert","Home","Review"],correct:0},
+  {q:"In Word what does a red line under a word indicate?",options:["The word is spelled wrong","The word is not in the computers dictionary","The computer likes the color red"],correct:0},
+  {q:"In Word the most common task are under what tab on the ribbon?",options:["Home","File","Main"],correct:0},
+  {q:"In Word the print feature is located under what tab on the ribbon?",options:["File","Print","Page Layout"],correct:0},
+  {q:"In Word to insert a clipart image you should?",options:["Insert tab - clipart","File-print","Insert tab—image"],correct:0},
+  {q:"In Word to open a document in word you should?",options:["File--save as","File open","File save"],correct:1},
+  {q:"In Word to save you work you should?",options:["Just exit","File-open","File-save"],correct:2},
+  {q:"In Word if you wanted to rename a document or save a second copy of an important document you should open the document then do what?",options:["File-save as","File Save","File Rename"],correct:0},
+  {q:"Which of the following are document views in Word?",options:["Draft","Text Preview","Print Layout","Full Screen Reading"],correct:3},
+  {q:"Times New Roman, Comic Sans and Calibri are called_______.",options:["Fonts","Variations","Font sizes"],correct:0},
+  {q:"You insert a clip art and it is too big. To resize it you would _____.",options:["Change it the same way you change the font size","Click on the clip art to show the handles and drag a handle to resize it","Click the insert tab and choose resize"],correct:1},
+  {q:"What would you do to highlight a word? You position the cursor next to the word and then _____.",options:["Drag the mouse while holding the left mouse button","Roll mouse around","Click the mouse three times"],correct:0},
+  {q:"What happens in a document when the \"cut\" command is used?",options:["Only half the screen is seen.","The application stops running.","Selected text or graphics are removed."],correct:2},
+  {q:"Which one is not a tab in Microsoft Word?",options:["Close","Insert","Home","Design"],correct:0},
+  {q:"Which one of the following is not in the dropdown menu when you click the File tab in Microsoft Word?",options:["Save As","Open","New","Backup"],correct:3},
+  {q:"What tab do you go to for the spelling and grammar check?",options:["Home","Review","Insert","File"],correct:1},
+  {q:"Which tab would you choose to change the font size of a word from 12 points to 18 points?",options:["File","Home","Insert","Page Layout"],correct:1},
+  {q:"To save a document for the first time you would choose _________.",options:["Save","Save As","Neither A nor B"],correct:0},
+  {q:"Which tab in Microsoft Word would you select to insert a shape in to a document?",options:["Insert","Review","View","File"],correct:0},
+  {q:"If you want to add a table to your document, which tab would you choose?",options:["File","Home","Insert","Save"],correct:2},
+  {q:"What is the function of this key?",options:["Paste","Copy","Delete","Undo"],correct:3},
+  {q:"What is the function of this key?",options:["Left Align","Justify","Center","Right Align"],correct:2},
+  {q:"You have created a table and you want to add 3 more rows to it. To add the new rows to the table, you would .....",options:["Delete the table and start over","Left click and choose insert rows","Right click and choose insert rows","Choose the Insert tab and click on ADD"],correct:2},
+  {q:"To remove a portion of text from a document, you can ___________.",options:["Cut it","Paste it","Undo it","Redo it"],correct:0},
+  {q:"Different lettering designs which can be used to add variety to documents are called _",options:["Symbols","Bullets","Fonts","Hyperlinks"],correct:0},
+  {q:"The feature that will reverse your action should you make a mistake is called __________.",options:["Undo","Spell Check","Paste","Insert"],correct:0},
+  {q:"This command creates a duplicate of a selection and saves it to the clipboard.",options:["Cut","Paste","Copy","Print"],correct:2},
+  {q:"Font size is measured in __________.",options:["Centimeters","Bytes","Points","Inches"],correct:2},
+  {q:"A table is a grid into which data can be entered. It is made up of ___________.",options:["Rows","Columns","Both a & b","None of the above"],correct:2},
+
+  // ======= Section 3 =======
+  {q:"The spelling dialog box can be involved by choosing spelling from ________ menu.",options:["Insert","File","Tools","View"],correct:2},
+  {q:"A PowerPoint feature allows the user to create a simple presentation without having to spend too much time on it?",options:["AutoContent Wizard","Animation","Color Schemes","Chart Wizard"],correct:1},
+  {q:"Which PowerPoint feature adds special effects to modify the appearance of the slides and the timing between each slide?",options:["Color Schemes","Animation","Transition Settings","Handouts"],correct:2},
+  {q:"To print the PowerPoint presentation, press",options:["Ctrl + T","Ctrl + E","Ctrl + S","Ctrl + P"],correct:3},
+  {q:"What is a slide transition?",options:["Overheads","Letters","A special effect used to introduce a slide in a slide show","The way one slide looks"],correct:2},
+  {q:"How can you stop a slide show?",options:["Press the right arrow","Press Escape (cancel)","Press the left arrow","Press the down arrow"],correct:1},
+  {q:"What do you do to start the slide show?",options:["Click on Go","Turn on transition","Click on the Slide Show icon","All of the above"],correct:2},
+  {q:"To print a presentation using shortcut keys, press ____.",options:["ALT+TAB","CTRL+P","ALT+P","TAB+P"],correct:1},
+  {q:"To start PowerPoint, click the Start button on the Windows taskbar, point to Programs, and then select ____.",options:["Accessories","Microsoft Office Tools","Microsoft PowerPoint","Start PowerPoint"],correct:2},
+  {q:"You will use ____ when making a presentation.",options:["PowerPoint viewer","Scroll bars","Slide show view","Voice commands"],correct:2},
+  {q:"To access the PowerPoint Help system using the keyboard, press ____. ",options:["ALT+TAB","CTRL+H","ESC","F1"],correct:3},
+  {q:"A(n) ____ is the basic unit of a PowerPoint presentation.",options:["Object","Placeholder","Slide","Task pane"],correct:2},
+  {q:"To start a slide show using the keyboard, press ____.",options:["CTRL+S","CTRL+ENTER","F4","F5"],correct:3},
+  {q:"Underline, shadow, superscript, and subscript are all examples of text ____.",options:["Colors","Effects","Fonts","Styles"],correct:3},
+  {q:"It is a collection of data and information that is to be delivered to a specific audience.",options:["A presentation","Effective presentation","PowerPoint presentation","Slideshow presentation"],correct:0},
+  {q:"This button allows you to create a new presentation, Open an existing presentation, save and save as, print, send, or close",options:["Microsoft Office button","New button","Open button","PowerPoint button"],correct:1},
+  {q:"These are design templates that can be applied to an entire presentation that allows for consistency throughout the presentation.",options:["Designs","Styles","Themes","Templates"],correct:2},
+  {q:"These are effects that are in place when you switch from one slide to the next.",options:["Animations","Designs","Effects","Transitions"],correct:3},
+  {q:"When the PowerPoint program opens what is the layout of the first slide that appears?",options:["Title and Content","Title Slide","Comparison","Two content"],correct:0},
+  {q:"Every new bullet represent....",options:["A new idea or thought","A new paragraph","An image"],correct:1},
+  {q:"When making a \"sub\" line - what button must you click or push to get the bullet to move over to the right?",options:["Enter key","Right alignment","Decrease indent","Increase indent"],correct:3},
+  {q:"When you want to animate a part of your text (words) you must click on the Animation tab then click.....?",options:["Custom Animation","Transition","Insert","Design"],correct:0},
+  {q:"What does \"image from a file\" mean?",options:["Picture on the Internet","Movie clip you saved to your computer's harddrive (memory)","Picture you saved to your computer's harddrive (memory)","Picture that Microsoft PowerPoint has saved for you"],correct:2},
+  {q:"When you want to change the \"design\" of your slideshow - this means you are going to change....?",options:["Transitions between slides","Size of your slides","Layout of your slides","Color or look of your slides"],correct:3},
+  {q:"What tab would you click on to add a sound or movie clip to your slideshow?",options:["Insert","Animation","Design","Add Ins"],correct:0},
+  {q:"What is clipart?",options:["Movie clips that can be inserted into your PowerPoint slideshow","Drawings that you can make and inserted into your PowerPoint slideshow","Pieces of artwork you can clip to your monitor","Pre-made images that can be inserted into your PowerPoint slideshow"],correct:1},
+  {q:"When you save your PowerPoint slideshow to your USB and get this error message: \"This file already exists. Do you want to replace the existing file?\" What do you click?",options:["Yes","No","Click the red X at the top","Cancel"],correct:0},
+  {q:"What company made the PowerPoint program?",options:["Apple","Microsoft","Samsung","Windows"],correct:1},
+  {q:"Why was PowerPoint created?",options:["As a way to communicate ideas to your audience","To make movie and sound clips","As a place to type paragraphs of information"],correct:0},
+  {q:"A _______ is a predefined combination of colors, effects, and fonts that can be applied to your presentation.",options:["Theme","Layout","Both A and B","None of the above"],correct:0},
+  {q:"The ________ view is where you create and edit your slides.",options:["Notes Page","Slide Sorter","Normal","Slide Show"],correct:2},
+  {q:"A PowerPoint chart is updated automatically whenever the ___________ changes.",options:["Legend","Chart title","Excel source data","None of the above"],correct:2},
+  {q:"You can insert movies from files on your computer and the Microsoft Clip Organizer.",options:["True","False"],correct:0},
+  {q:"Click ________ in the Animation group to open the Custom Animation task pane.",options:["Add effect","Custom animation","Insert animation","None of the above"],correct:1},
+  {q:"The _________ stores information about the theme and allows you to easily make changes to all or a specific slide layout.",options:["Design template","Master theme"],correct:1},
+  {q:"Do you find PowerPoint on the Start Menu?",options:["Accessories","Outlook","Microsoft Office"],correct:2},
+  {q:"Which tab enables you to add a picture to your PowerPoint?",options:["View","Insert","Tools"],correct:1},
+  {q:"Slides can have",options:["Title, text, graphs","Drawn objects, shapes","Clipart, drawn art, visual","Any of the above"],correct:3},
+  {q:"A Chart can be put as a part of the presentation using",options:["Insert -> Pictures –> Chart","Insert –> Chart","Edit –> Chart","View -> Chart"],correct:1},
+  {q:"Which key on the keyboard can be used to view Slide show?",options:["F1","F2","F5","F10"],correct:2},
+  {q:"Which view in Power Point can be used to enter Speaker Comments?",options:["Normal","Slide Show","Slide Sorter","Notes Page view"],correct:3},
+  {q:"Power Point can display data from which of the following add-in software of MS Office?",options:["Equation Editor","Organization Chart","Photo Album","All of these"],correct:3},
+  {q:"What tab must you be in if you want to change the size and font?",options:["Insert","Animation","Home","Slide Show"],correct:2},
+  {q:"When you want to animate a part of your text (words) you must click on which of the following FIRST?",options:["Animation tab","Transition","Insert","Text Box"],correct:0},
+  {q:"What tab would you click on to add a sound or video clip (cartoon) to your slideshow?",options:["Insert","Animation","Design","Add Ins"],correct:0},
+  {q:"If you want to add a new slide you must be in the ________ tab?",options:["Insert","Animation","Home","Design"],correct:0}
+];
+// === باقي الكود كما هو ==
+
+let easySet = new Set();
+let medSchedule = [];
+let hardSchedule = [];
+let userAnswers = {};
+let questionOrder = Array.from(Array(questions.length).keys());
+let qPtr = 0;
+let nQuestionsAsked = 0;
+let quizContainer = document.getElementById("quiz-container");
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+shuffle(questionOrder);
+
+function findNextQuestion() {
+  if (medSchedule.length && nQuestionsAsked === medSchedule[0].showAt) {
+    let sched = medSchedule.shift();
+    if(!easySet.has(sched.qidx)) return sched.qidx;
+  }
+  if (hardSchedule.length && nQuestionsAsked === hardSchedule[0].showAt) {
+    let sched = hardSchedule.shift();
+    if(!easySet.has(sched.qidx)) {
+      if (!sched.scheduledSecond) {
+        hardSchedule.unshift({qidx:sched.qidx,showAt:nQuestionsAsked+5,scheduledSecond:true});
+      }
+      return sched.qidx;
+    }
+  }
+  while (qPtr < questionOrder.length) {
+    if (!easySet.has(questionOrder[qPtr])) {
+      return questionOrder[qPtr++];
+    } else {
+      qPtr++;
+    }
+  }
+  return -1;
+}
+function renderQuestion(qIdx) {
+  let q = questions[qIdx];
+  quizContainer.innerHTML = `
+    <div class="question-card">
+      <span class="question-num">Q${nQuestionsAsked+1} of ${questions.length}</span>
+      <div class="question">${q.q}</div>
+      <ul class="option-list">
+        ${q.options.map((op,oidx) => `
+          <li>
+            <label class="option-label" id="op-${oidx}">
+              <input type="radio" name="option" value="${oidx}">
+              <span>${op}</span>
+            </label>
+          </li>
+        `).join('')}
+      </ul>
+      <button id="submit-btn" disabled>Submit</button>
+      <div id="feedback"></div>
+      <div id="difficulty-btns" class="hide">
+        <button class="difficulty-btn easy">Easy</button>
+        <button class="difficulty-btn medium">Medium</button>
+        <button class="difficulty-btn hard">Hard</button>
+      </div>
+    </div>
+  `;
+  document.querySelectorAll('input[name="option"]').forEach(inp=>{
+    inp.addEventListener('change',()=> {
+      document.querySelectorAll('.option-label').forEach(lab=>lab.classList.remove('selected'));
+      for(let o=0;o<q.options.length;++o){
+        if(document.getElementById('op-'+o).querySelector('input').checked){
+          document.getElementById('op-'+o).classList.add('selected');
+        }
+      }
+      document.getElementById("submit-btn").disabled = false;
+    });
+  });
+  document.getElementById("submit-btn").onclick = ()=>{
+    const selected = Array.from(document.querySelectorAll('input[name="option"]')).find(i=>i.checked);
+    const answer = selected ? parseInt(selected.value) : -1;
+    userAnswers[qIdx]=answer;
+    let isCorrect=false;
+    if(Array.isArray(q.correct)) {
+      isCorrect = q.correct.indexOf(answer)!==-1;
+    } else {
+      isCorrect=(answer===q.correct);
+    }
+    document.querySelectorAll('.option-label input').forEach(i=>i.disabled=true);
+    if(isCorrect){
+      document.getElementById('op-'+answer).classList.add('correct');
+      document.getElementById('feedback').innerHTML = `<div class="correct-msg">Correct! ✅</div>`;
+    } else {
+      document.getElementById('op-'+answer).classList.add('incorrect');
+      if(Array.isArray(q.correct)){
+        q.correct.forEach(c=>{
+          document.getElementById('op-'+c).classList.add('reveal');
+        });
+      } else {
+        document.getElementById('op-'+q.correct).classList.add('reveal');
+      }
+      document.getElementById('feedback').innerHTML = `
+        <div class="incorrect-msg">Incorrect ❌ <br>
+        Correct: <span style="color:#2ecc71">
+          ${Array.isArray(q.correct)?q.correct.map(k=>q.options[k]).join(' / '):q.options[q.correct]}
+        </span>
+        </div>
+      `;
+    }
+    document.getElementById('submit-btn').disabled=true;
+    document.getElementById('difficulty-btns').classList.remove('hide');
+    document.querySelector('.difficulty-btn.easy').onclick = ()=>{
+      easySet.add(qIdx);
+      nQuestionsAsked++;
+      showNext();
+    };
+    document.querySelector('.difficulty-btn.medium').onclick = ()=>{
+      medSchedule.push({qidx:qIdx,showAt:nQuestionsAsked+5});
+      nQuestionsAsked++;
+      showNext();
+    };
+    document.querySelector('.difficulty-btn.hard').onclick = ()=>{
+      hardSchedule.push({qidx:qIdx,showAt:nQuestionsAsked+3,scheduledSecond:false});
+      nQuestionsAsked++;
+      showNext();
+    };
+  }
+}
+
+function showNext() {
+  let nextq = findNextQuestion();
+  if (nextq === -1) {
+    renderFinalResult();
+    return;
+  }
+  renderQuestion(nextq);
+}
+function renderFinalResult() {
+  let total = questions.length;
+  let answered = Object.keys(userAnswers).length;
+  let correct = 0;
+  for (let idx in userAnswers) {
+    let q = questions[idx], ans = userAnswers[idx];
+    if (Array.isArray(q.correct)) { if (q.correct.indexOf(ans)!==-1) correct++; }
+    else if (ans===q.correct) correct++;
+  }
+  quizContainer.innerHTML=`
+    <div class="question-card" style="text-align:center;">
+      <h2 style="color:#47e08c;">🎉 All questions completed!</h2>
+      <p class="result-final-msg">عدد اجاباتك الصحيحة: <b>${correct}</b> من ${total} <br> (${((correct/total)*100).toFixed(1)}%)</p>
+      <label class="improve-label" for="improve">هل لديك إضافة أو اقتراح لتحسين الأسئلة؟</label>
+      <br>
+      <textarea id="improve" class="improve-input" maxlength="300" placeholder=" اكتب اقتراحك هنا "></textarea><b>
+      <button class="difficulty-btn" id="sendResultBtn" style="background: #275a4b;">  إرسال الاقتراح </button>
+      <button class="difficulty-btn" style="background: #8b8356;" onclick="location.reload()">إعادة الكويز</button>
+      <div id="final-send-state" style="margin-top:15px;color:#18ffa6;font-size:1.13em;"></div>
+    </div>
+  `;
+  document.getElementById("sendResultBtn").onclick = function(){
+    const proposal = document.getElementById("improve").value;
+    if (!proposal.trim()) {
+      document.getElementById("final-send-state").style.color = "#f3b928";
+      document.getElementById("final-send-state").textContent = "يرجى كتابة اقتراح أو ملاحظة قبل الإرسال (اختياري).";
+      return;
+    }
+    let msg = `📊 [اقتراح تحسين الأسئلة]\n${proposal}\n—-`;
+    trySendTelegram({text: msg}, function(ok){
+      document.getElementById("final-send-state").style.color = (ok ? "#43fa90" : "#f3b928");
+      document.getElementById("final-send-state").textContent = ok ? "✔️ تم ارسال الاقتراح بنجاح!" : "⚠️ سيتم الارسال تلقائياً عند توفر الانترنت.";
+    });
+    document.getElementById("sendResultBtn").disabled = true;
+  };
+}
+  </script>
+</body>
+</html>
+.
